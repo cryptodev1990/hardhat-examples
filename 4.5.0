@@ -1,0 +1,11 @@
++ solidity-coverage@0.8.1
++ ts-node@10.9.1
++ typechain@8.1.0
++ typescript@4.9.3
+added 70 packages from 51 contributors, removed 3 packages, updated 2 packages and audited 727 packages in 30.458s
+
+112 packages are looking for funding
+  run `npm fund` for details
+
+found 5 vulnerabilities (4 high, 1 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
