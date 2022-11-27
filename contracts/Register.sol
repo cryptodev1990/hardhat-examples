@@ -10,6 +10,7 @@ contract Register {
 
   address public owner;
 
+// teachers attrubutes define
   struct teacher {
     uint32 teacherId;
     string teacherName;
@@ -20,6 +21,7 @@ contract Register {
     bool isComplete;
   }
 
+// students attrubutes define
   struct student {
     uint32 teacherId;
     uint32 studentId;
@@ -43,25 +45,25 @@ contract Register {
     _;
   }
 
-  function adminRegister(uint32 memory id, string memory name, string memory department, string memory email) public onlyOwner {
+  function adminRegister(uint32 id, string memory name, string memory department, string memory email) public onlyOwner {
     require(teachers[id].isExist == false, "Already registered");
     teachers[id] = teacher(id, name, department, email, address(0), true, false);
   }
 
-  function teacherCompleteRegister(uint32 memory id, address memory newAddress) public {
+  function teacherCompleteRegister(uint32 id, address newAddress) public {
     require(teachers[id].isExist == true, "Admin did not registered");
     require(teachers[id].isComplete == false, "Alrady registered");
     teachers[id].teacherAddress = newAddress;
     teachers[id].isComplete = true;
   }
 
-  function studentRegister(uint32 memory teacherId, uint32 memory studentId, string memory name, string memory department, string memory email) public {
+  function studentRegister(uint32 teacherId, uint32 studentId, string memory name, string memory department, string memory email) public {
     require(teachers[teacherId].isExist == true, "You are not registeres as a teacher");
     require(students[teacherId][studentId].isExist == false, "Already registered student");
     students[teacherId][studentId] = student(teacherId, studentId, name, department, email, address(0), true, false);
   }
 
-  function studentCompleteRegister(uint32 memory teacherId, uint32 memory studentId, address memory newAddress) public {
+  function studentCompleteRegister(uint32 teacherId, uint32 studentId, address newAddress) public {
     require(students[teacherId][studentId].isExist == true, "You are not registered by your teacher");
     require(students[teacherId][studentId].isComplete == false, "Already registered");
     students[teacherId][studentId].studentAddress = newAddress;
