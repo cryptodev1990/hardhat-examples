@@ -62,6 +62,9 @@ contract Register {
   }
 
   function studentCompleteRegister(uint32 memory teacherId, uint32 memory studentId, address memory newAddress) public {
-    require();
+    require(students[teacherId][studentId].isExist == true, "You are not registered by your teacher");
+    require(students[teacherId][studentId].isComplete == false, "Already registered");
+    students[teacherId][studentId].studentAddress = newAddress;
+    students[teacherId][studentId].isComplete = true;
   }
 }
